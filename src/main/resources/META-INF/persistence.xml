@@ -6,7 +6,7 @@
 
     <persistence-unit name="bfsExampleUnit" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>com.codecool.bfsexample.model.User</class>
+        <class>com.codecool.bfsexample.model.UserNode</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL94Dialect"/>
             <property name="hibernate.hbm2dll.auto" value="create-drop"/>
@@ -19,7 +19,6 @@
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/jpaexampleDB"/>
             <property name="javax.persistence.jdbc.user" value="postgres"/>
             <property name="javax.persistence.jdbc.password" value="postgres"/>
-            <!--<property name="javax.persistence.sql-load-script-source" value="insert.sql"/>-->
         </properties>
     </persistence-unit>
 
