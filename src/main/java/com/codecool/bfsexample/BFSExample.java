@@ -21,6 +21,9 @@ public class BFSExample {
             em.persist(user);
         }
         transaction.commit();
+
+        GraphPlotter.plot(users);
+        
         System.out.println("Done!");
     }
 

@@ -24,6 +24,7 @@ public class RandomDataGenerator {
     public List<UserNode> generate() {
         List<UserNode> users = new ArrayList<>();
         UserNode firstUser = genNewUser();
+        users.add(firstUser);
         // first generate and connect users in a star shaped tree
         genTree(firstUser, users, 4);
         // then introduce some loops
