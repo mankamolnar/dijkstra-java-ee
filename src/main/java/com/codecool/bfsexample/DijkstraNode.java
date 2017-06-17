@@ -34,7 +34,7 @@ public class DijkstraNode {
     }
 
     public int getDistance() {
-        return distance;
+        return distance-1;
     }
 
     public void setPath(List<UserNode> path) {

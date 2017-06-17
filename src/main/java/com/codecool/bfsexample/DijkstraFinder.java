@@ -37,10 +37,7 @@ public class DijkstraFinder {
         setUpSearch(re1, re2);
     }
 
-    public void shortestPath(UserNode userNode, DijkstraPath path) {
-        if (path.size() >= searchTable.getMaxDistance()) {
-            return;
-        }
+    public void shortestPath(UserNode userNode, DijkstraPath path, int maxDinstance) {
 
         DijkstraPath newPath = new DijkstraPath();
         newPath.setPath(path);
@@ -48,12 +45,18 @@ public class DijkstraFinder {
         searchTable.add(userNode, newPath.size(), newPath.getPath());
 
         for (UserNode friend : userNode.getFriends()) {
-            if (!path.contains(friend)) {
-                shortestPath(friend, newPath);
+            if (!path.contains(friend) && (maxDinstance == 0 || maxDinstance >= newPath.size())) {
+                shortestPath(friend, newPath, maxDinstance);
 
             }
         }
 
+    }
+
+    public DijkstraSearchTable friendsInRange(int range) {
+        searchTable = new DijkstraSearchTable(searchTable.getMaxDistance());
+        shortestPath(base, new DijkstraPath(), range);
+        return searchTable;
     }
 
     // *** PRIVATE METHODS ***

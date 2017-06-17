@@ -42,6 +42,16 @@ public class DijkstraSearchTable {
         return 0;
     }
 
+    public DijkstraNode findAndGet(UserNode userNode) {
+        for (int i = 0; i < table.size(); i++) {
+            DijkstraNode currentNode = table.get(i);
+            if (currentNode.getUserNode().getId() == userNode.getId()) {
+                return currentNode;
+            }
+        }
+        return null;
+    }
+
     public int getMaxDistance() {
         return maxDistance;
     }

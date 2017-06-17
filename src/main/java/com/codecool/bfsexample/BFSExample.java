@@ -41,7 +41,14 @@ public class BFSExample {
         GraphPlotter.paintUserToRed(dijkstra.getBase());
         GraphPlotter.paintUserToRed(dijkstra.getDestination());
 
-        dijkstra.shortestPath(dijkstra.getBase(), new DijkstraPath());
+        dijkstra.shortestPath(dijkstra.getBase(), new DijkstraPath(), 0);
+        System.out.println("Distance: " + dijkstra.getSearchTable().findAndGet(dijkstra.getDestination()).getDistance());
+        System.out.println("Shortest path: " + dijkstra.getSearchTable().findAndGet(dijkstra.getDestination()).getPath());
         GraphPlotter.paintRoute(dijkstra.getSearchTable(), dijkstra.getDestination());
+
+        dijkstra.friendsInRange(1);
+        System.out.println("Friends in 1 range: " + dijkstra.getSearchTable());
+
+
     }
 }
