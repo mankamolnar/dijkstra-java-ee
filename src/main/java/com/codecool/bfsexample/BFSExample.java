@@ -10,9 +10,11 @@ import java.util.List;
 
 public class BFSExample {
 
-    public static void populateDB(EntityManager em) {
+    public static final int MAX_FRIENDSHIP_DEPTH = 3;
 
-        RandomDataGenerator generator = new RandomDataGenerator();
+    public static List<UserNode> populateDB(EntityManager em) {
+
+        RandomDataGenerator generator = new RandomDataGenerator(MAX_FRIENDSHIP_DEPTH);
         List<UserNode> users = generator.generate();
 
         EntityTransaction transaction = em.getTransaction();
@@ -22,16 +24,24 @@ public class BFSExample {
         }
         transaction.commit();
 
-        GraphPlotter.plot(users);
-        
-        System.out.println("Done!");
+        return users;
     }
 
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("bfsExampleUnit");
         EntityManager em = emf.createEntityManager();
-
         em.clear();
-        populateDB(em);
+
+        List<UserNode> users = populateDB(em);
+        GraphPlotter.plot(users);
+
+        DijkstraFinder dijkstra = new DijkstraFinder(users, MAX_FRIENDSHIP_DEPTH);
+
+        dijkstra.setUpRandomSearch();
+        GraphPlotter.paintUserToRed(dijkstra.getBase());
+        GraphPlotter.paintUserToRed(dijkstra.getDestination());
+
+        dijkstra.shortestPath(dijkstra.getBase(), new DijkstraPath());
+        GraphPlotter.paintRoute(dijkstra.getSearchTable(), dijkstra.getDestination());
     }
 }

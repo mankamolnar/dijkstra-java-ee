@@ -19,15 +19,21 @@ public class RandomDataGenerator {
             "Winifred", "Tanner", "Rajah", "Cedric", "Tyler", "Nicholas", "Abra", "Aurora",
             "Bryar", "Kibo", "Myles", "Hillary", "Lydia", "Dolan", "Lucian", "Prescott"
     };
+    private int maxDepth;
+
+    public RandomDataGenerator(int maxDepth) {
+        this.maxDepth = maxDepth;
+    }
 
 
     public List<UserNode> generate() {
         List<UserNode> users = new ArrayList<>();
+
         UserNode firstUser = genNewUser();
         users.add(firstUser);
-        // first generate and connect users in a star shaped tree
-        genTree(firstUser, users, 4);
-        // then introduce some loops
+
+        genTree(firstUser, users, maxDepth);
+
         for (int i = 0; i < users.size() - 30; i++) {
             if (i % 5 == 0) {
                 users.get(i).addFriend(users.get(i + 30));
