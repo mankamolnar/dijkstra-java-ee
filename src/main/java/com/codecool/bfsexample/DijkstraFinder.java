@@ -15,11 +15,13 @@ public class DijkstraFinder {
     private UserNode base;
     private UserNode destination;
     private DijkstraSearchTable searchTable;
+    private int maxDistance;
 
     // *** PUBLIC METHODS ***
     public DijkstraFinder(List<UserNode> users, int maxDistance) {
         this.users = users;
         this.searchTable = new DijkstraSearchTable(maxDistance);
+        this.maxDistance = maxDistance * 3;
     }
 
     public void setUpSearch(UserNode base, UserNode destination) {
@@ -38,6 +40,9 @@ public class DijkstraFinder {
     }
 
     public void shortestPath(UserNode userNode, DijkstraPath path, int maxDinstance) {
+        if (path.size() > this.maxDistance) {
+            return;
+        }
 
         DijkstraPath newPath = new DijkstraPath();
         newPath.setPath(path);

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class BFSExample {
 
-    public static final int MAX_FRIENDSHIP_DEPTH = 3;
+    public static final int MAX_FRIENDSHIP_DEPTH = 6;
 
     public static List<UserNode> populateDB(EntityManager em) {
 
